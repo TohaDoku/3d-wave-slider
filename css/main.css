@@ -64,10 +64,68 @@ body {
     content: '';
     position: absolute;
     height: 100%;
-    width: 26px;
+    width: var(--index);
     right: calc(var(--index) * -1);
 }
 
 .item::after {
     left: calc(var(--index) * -1);
+}
+
+/* Трансформация справа от активного */
+
+.items .item:hover + * {
+    filter: inherit;
+    transform: translateZ(calc(var(--index) * 8.5)) rotateY(35deg);
+    z-index: -1;
+}
+
+.items .item:hover + * + * {
+    filter: inherit;
+    transform: translateZ(calc(var(--index) * 5.6)) rotateY(40deg);
+    z-index: -2;
+}
+
+.items .item:hover + * + * + * {
+    filter: inherit;
+    transform: translateZ(calc(var(--index) * 2.5)) rotateY(30deg);
+    z-index: -3;
+}
+
+.items .item:hover + * + * + * + * {
+    filter: inherit;
+    transform: translateZ(calc(var(--index) * 0.6)) rotateY(15deg);
+    z-index: -4;
+}
+
+.items .item:has(+ :hover) {
+    filter: inherit;
+    transform: translateZ(calc(var(--index) * 8.5)) rotateY(-35deg);
+}
+
+.items .item:has(+ * + :hover) {
+    filter: inherit;
+    transform: translateZ(calc(var(--index) * 5.6)) rotateY(-40deg);
+    z-index: -2;
+}
+
+.items .item:has(+ * + * + :hover) {
+    filter: inherit;
+    transform: translateZ(calc(var(--index) * 2.5)) rotateY(-30deg);
+    z-index: -3;
+}
+
+.items .item:has(+ * + * + * + :hover) {
+    filter: inherit;
+    transform: translateZ(calc(var(--index) * 0.6)) rotateY(-15deg);
+    z-index: -4;
+}
+
+.items .item:active, 
+.items .item:focus {
+    width: 20vw;
+    filter: inherit;
+    z-index: 100;
+    transform: translateZ(calc(var(--index) * 10));
+    margin: 0 0.45vw;
 }
