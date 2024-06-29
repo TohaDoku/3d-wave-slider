@@ -1,0 +1,73 @@
+/* author: https://codepen.io/HighFlyer/pen/GRLZYKw Thea */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+}
+
+:root {
+    /* Единица для определения размера */
+    --index: calc(1vw + 1vh);
+
+    /* Трансформация */
+    --transition: cubic-bezier(0.1, 0.7, 0, 1);
+}
+
+.wrapper {
+    /* Контент по центру и запрет прокрутки */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.items {
+    display: flex;
+    gap: 0.4rem;
+    perspective: calc(var(--index) * 35);
+}
+
+.item {
+    width: calc(var(--index) * 3);
+    height: calc(var(--index) * 12);
+
+    background-color: #222;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+
+    /* Затемнение изображений */
+    filter: grayscale(1) brightness(0.5);
+
+    transition: transform 1.25s var(--transition), filter 3s var(--transition), width 1.25s var(--transition);
+
+    will-change: transform, filter, rotateY, width;
+}
+
+/* Поведение по наведению */
+.items .item:hover {
+    filter: inherit;
+
+    /* Трансформация по оси Z */
+    transform: translateZ(calc(var(--index) * 10));
+}
+
+
+.item::before,
+.item::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 26px;
+    right: calc(var(--index) * -1);
+}
+
+.item::after {
+    left: calc(var(--index) * -1);
+}
